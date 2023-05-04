@@ -10,23 +10,13 @@
 		49DF0BCF2A04063400D6A490 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF0BCE2A04063400D6A490 /* AppDelegate.swift */; };
 		49DF0BD12A04063400D6A490 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF0BD02A04063400D6A490 /* SceneDelegate.swift */; };
 		49DF0BD32A04063400D6A490 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF0BD22A04063400D6A490 /* ViewController.swift */; };
-		49DF0BD62A04063400D6A490 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DF0BD42A04063400D6A490 /* Main.storyboard */; };
 		49DF0BD82A04063500D6A490 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DF0BD72A04063500D6A490 /* Assets.xcassets */; };
 		49DF0BDB2A04063500D6A490 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DF0BD92A04063500D6A490 /* LaunchScreen.storyboard */; };
 		49DF0BE62A04063500D6A490 /* ToDoSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF0BE52A04063500D6A490 /* ToDoSampleTests.swift */; };
-		49DF0BF02A04063500D6A490 /* ToDoSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF0BEF2A04063500D6A490 /* ToDoSampleUITests.swift */; };
-		49DF0BF22A04063500D6A490 /* ToDoSampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF0BF12A04063500D6A490 /* ToDoSampleUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		49DF0BE22A04063500D6A490 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 49DF0BC32A04063400D6A490 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 49DF0BCA2A04063400D6A490;
-			remoteInfo = ToDoSample;
-		};
-		49DF0BEC2A04063500D6A490 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 49DF0BC32A04063400D6A490 /* Project object */;
 			proxyType = 1;
@@ -40,15 +30,11 @@
 		49DF0BCE2A04063400D6A490 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DF0BD02A04063400D6A490 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		49DF0BD22A04063400D6A490 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		49DF0BD52A04063400D6A490 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49DF0BD72A04063500D6A490 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49DF0BDA2A04063500D6A490 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49DF0BDC2A04063500D6A490 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49DF0BE12A04063500D6A490 /* ToDoSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DF0BE52A04063500D6A490 /* ToDoSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoSampleTests.swift; sourceTree = "<group>"; };
-		49DF0BEB2A04063500D6A490 /* ToDoSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		49DF0BEF2A04063500D6A490 /* ToDoSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoSampleUITests.swift; sourceTree = "<group>"; };
-		49DF0BF12A04063500D6A490 /* ToDoSampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoSampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,13 +52,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49DF0BE82A04063500D6A490 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -81,7 +60,6 @@
 			children = (
 				49DF0BCD2A04063400D6A490 /* ToDoSample */,
 				49DF0BE42A04063500D6A490 /* ToDoSampleTests */,
-				49DF0BEE2A04063500D6A490 /* ToDoSampleUITests */,
 				49DF0BCC2A04063400D6A490 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,7 +69,6 @@
 			children = (
 				49DF0BCB2A04063400D6A490 /* ToDoSample.app */,
 				49DF0BE12A04063500D6A490 /* ToDoSampleTests.xctest */,
-				49DF0BEB2A04063500D6A490 /* ToDoSampleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,7 +79,6 @@
 				49DF0BCE2A04063400D6A490 /* AppDelegate.swift */,
 				49DF0BD02A04063400D6A490 /* SceneDelegate.swift */,
 				49DF0BD22A04063400D6A490 /* ViewController.swift */,
-				49DF0BD42A04063400D6A490 /* Main.storyboard */,
 				49DF0BD72A04063500D6A490 /* Assets.xcassets */,
 				49DF0BD92A04063500D6A490 /* LaunchScreen.storyboard */,
 				49DF0BDC2A04063500D6A490 /* Info.plist */,
@@ -116,15 +92,6 @@
 				49DF0BE52A04063500D6A490 /* ToDoSampleTests.swift */,
 			);
 			path = ToDoSampleTests;
-			sourceTree = "<group>";
-		};
-		49DF0BEE2A04063500D6A490 /* ToDoSampleUITests */ = {
-			isa = PBXGroup;
-			children = (
-				49DF0BEF2A04063500D6A490 /* ToDoSampleUITests.swift */,
-				49DF0BF12A04063500D6A490 /* ToDoSampleUITestsLaunchTests.swift */,
-			);
-			path = ToDoSampleUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,24 +132,6 @@
 			productReference = 49DF0BE12A04063500D6A490 /* ToDoSampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		49DF0BEA2A04063500D6A490 /* ToDoSampleUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 49DF0BFB2A04063500D6A490 /* Build configuration list for PBXNativeTarget "ToDoSampleUITests" */;
-			buildPhases = (
-				49DF0BE72A04063500D6A490 /* Sources */,
-				49DF0BE82A04063500D6A490 /* Frameworks */,
-				49DF0BE92A04063500D6A490 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				49DF0BED2A04063500D6A490 /* PBXTargetDependency */,
-			);
-			name = ToDoSampleUITests;
-			productName = ToDoSampleUITests;
-			productReference = 49DF0BEB2A04063500D6A490 /* ToDoSampleUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,10 +146,6 @@
 						CreatedOnToolsVersion = 14.2;
 					};
 					49DF0BE02A04063500D6A490 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 49DF0BCA2A04063400D6A490;
-					};
-					49DF0BEA2A04063500D6A490 = {
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 49DF0BCA2A04063400D6A490;
 					};
@@ -221,7 +166,6 @@
 			targets = (
 				49DF0BCA2A04063400D6A490 /* ToDoSample */,
 				49DF0BE02A04063500D6A490 /* ToDoSampleTests */,
-				49DF0BEA2A04063500D6A490 /* ToDoSampleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -233,18 +177,10 @@
 			files = (
 				49DF0BDB2A04063500D6A490 /* LaunchScreen.storyboard in Resources */,
 				49DF0BD82A04063500D6A490 /* Assets.xcassets in Resources */,
-				49DF0BD62A04063400D6A490 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		49DF0BDF2A04063500D6A490 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		49DF0BE92A04063500D6A490 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -272,15 +208,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49DF0BE72A04063500D6A490 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				49DF0BF22A04063500D6A490 /* ToDoSampleUITestsLaunchTests.swift in Sources */,
-				49DF0BF02A04063500D6A490 /* ToDoSampleUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -289,22 +216,9 @@
 			target = 49DF0BCA2A04063400D6A490 /* ToDoSample */;
 			targetProxy = 49DF0BE22A04063500D6A490 /* PBXContainerItemProxy */;
 		};
-		49DF0BED2A04063500D6A490 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 49DF0BCA2A04063400D6A490 /* ToDoSample */;
-			targetProxy = 49DF0BEC2A04063500D6A490 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		49DF0BD42A04063400D6A490 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				49DF0BD52A04063400D6A490 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		49DF0BD92A04063500D6A490 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -442,7 +356,6 @@
 				INFOPLIST_FILE = ToDoSample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -470,7 +383,6 @@
 				INFOPLIST_FILE = ToDoSample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -526,42 +438,6 @@
 			};
 			name = Release;
 		};
-		49DF0BFC2A04063500D6A490 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6LL6SWW7S3;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gannasong.ToDoSampleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ToDoSample;
-			};
-			name = Debug;
-		};
-		49DF0BFD2A04063500D6A490 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6LL6SWW7S3;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gannasong.ToDoSampleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ToDoSample;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -588,15 +464,6 @@
 			buildConfigurations = (
 				49DF0BF92A04063500D6A490 /* Debug */,
 				49DF0BFA2A04063500D6A490 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		49DF0BFB2A04063500D6A490 /* Build configuration list for PBXNativeTarget "ToDoSampleUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				49DF0BFC2A04063500D6A490 /* Debug */,
-				49DF0BFD2A04063500D6A490 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
