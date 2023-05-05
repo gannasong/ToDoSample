@@ -1,5 +1,5 @@
 //
-//  TodoListViewController.swift
+//  ToDoListViewController.swift
 //  ToDoSample
 //
 //  Created by miguel on 2023/5/4.
@@ -8,7 +8,9 @@
 import UIKit
 import SnapKit
 
-class TodoListViewController: UIViewController {
+class ToDoListViewController: UIViewController {
+    private let viewModel: ToDoViewModel
+
     private var items = [String]()
 
     private let tableView: UITableView = {
@@ -17,6 +19,18 @@ class TodoListViewController: UIViewController {
         return tableView
     }()
 
+    // MARK: - Initialization
+
+    init(viewModel: ToDoViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "To Do List"
@@ -24,7 +38,9 @@ class TodoListViewController: UIViewController {
         setupSubviews()
         setupTableViewdelegate()
 
-        self.items = UserDefaults.standard.stringArray(forKey: "Todos") ?? []
+        viewModel.retrieve { [weak self] todos in
+            self?.items = todos
+        }
     }
 
     private func didTapEditTodo(index: Int) {
@@ -108,7 +124,7 @@ class TodoListViewController: UIViewController {
     }
 }
 
-extension TodoListViewController: UITableViewDelegate {
+extension ToDoListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -133,7 +149,7 @@ extension TodoListViewController: UITableViewDelegate {
     }
 }
 
-extension TodoListViewController: UITableViewDataSource {
+extension ToDoListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
