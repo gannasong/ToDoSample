@@ -25,10 +25,29 @@ public protocol ToDoStoreViewModelType {
 }
 
 class ToDoViewModel: ToDoStoreViewModelType, ToDoStoreOutputs, ToDoStoreInputs {
+    let fileManager: FileManager
     private var items = [String]()
 
     var inputs: ToDoStoreInputs { self }
     var outputs: ToDoStoreOutputs = MyOutputs()
+
+    public init(fileManager: FileManager = .default) {
+        self.fileManager = fileManager
+    }
+
+    var path: String {
+        return getURL().appendingPathComponent(String(describing: "ToDoStore"), isDirectory: false).path
+    }
+
+    var queue = DispatchQueue(label: "\(ToDoViewModel.self).Queue", qos: .userInitiated, attributes: .concurrent)
+
+    private func getURL() -> URL {
+        if let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            return directory
+        } else {
+            fatalError("Couldn't create directory to save.")
+        }
+    }
 
     // MARK: - Inputs
 
