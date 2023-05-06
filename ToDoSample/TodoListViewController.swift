@@ -10,7 +10,6 @@ import SnapKit
 
 class ToDoListViewController: UIViewController {
     private let viewModel: ToDoViewModel
-
     private var items = [String]()
 
     private let tableView: UITableView = {
@@ -38,9 +37,12 @@ class ToDoListViewController: UIViewController {
         setupSubviews()
         setupTableViewdelegate()
 
-        viewModel.retrieve { [weak self] todos in
-            self?.items = todos
+        viewModel.updateTotoItems = { [weak self] newTodoItems in
+            self?.items = newTodoItems
+            self?.tableView.reloadData()
         }
+
+        viewModel.retrieve()
     }
 
     private func didTapEditTodo(index: Int) {
@@ -57,13 +59,7 @@ class ToDoListViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak self] _ in
 
             if let titleField = alert.textFields?.first, let title = titleField.text, !title.isEmpty {
-                DispatchQueue.main.async {
-                    var currentItems = UserDefaults.standard.stringArray(forKey: "Todos") ?? []
-                    currentItems[index] = title
-                    self?.items = currentItems
-                    UserDefaults.standard.set(currentItems, forKey: "Todos")
-                    self?.tableView.reloadData()
-                }
+                self?.viewModel.update(index: index, title: title)
             }
         }))
 
@@ -71,9 +67,7 @@ class ToDoListViewController: UIViewController {
     }
 
     private func didTapDeleteTodo(indexPath: IndexPath) {
-        items.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .fade)
-        UserDefaults.standard.set(items, forKey: "Todos")
+        viewModel.delete(indexPath: indexPath)
     }
 
     @objc private func didTapAddTodo() {
@@ -88,13 +82,7 @@ class ToDoListViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak self] _ in
 
             if let titleField = alert.textFields?.first, let title = titleField.text, !title.isEmpty {
-                DispatchQueue.main.async {
-                    var currentItems = UserDefaults.standard.stringArray(forKey: "Todos") ?? []
-                    currentItems.append(title)
-                    UserDefaults.standard.set(currentItems, forKey: "Todos")
-                    self?.items.append(title)
-                    self?.tableView.reloadData()
-                }
+                self?.viewModel.add(title)
             }
         }))
 
