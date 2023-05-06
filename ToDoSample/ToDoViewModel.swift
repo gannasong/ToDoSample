@@ -7,19 +7,30 @@
 
 import Foundation
 
-public protocol ToDoStoreViewModelType {
-    var updateTotoItems: (([String]) -> Void)? { get set }
-
+public protocol ToDoStoreInputs {
     func retrieve()
     func delete(indexPath: IndexPath)
     func add(_ newTodo: String)
     func update(index: Int, title: String)
 }
 
-class ToDoViewModel: ToDoStoreViewModelType {
-    var updateTotoItems: (([String]) -> Void)?
+public protocol ToDoStoreOutputs {
+    var updateItems: (([String]) -> Void)? { get }
+    func updateTotoItems(_ closure: (([String]) -> Void)?)
+}
 
+public protocol ToDoStoreViewModelType {
+    var inputs: ToDoStoreInputs { get }
+    var outputs: ToDoStoreOutputs { get }
+}
+
+class ToDoViewModel: ToDoStoreViewModelType, ToDoStoreOutputs, ToDoStoreInputs {
     private var items = [String]()
+
+    var inputs: ToDoStoreInputs { self }
+    var outputs: ToDoStoreOutputs = MyOutputs()
+
+    // MARK: - Inputs
 
     func retrieve() {
         let storeItems = getStoreItems()
@@ -45,6 +56,14 @@ class ToDoViewModel: ToDoStoreViewModelType {
         todoItemsDidChange()
     }
 
+    // MARK: - Outputs
+
+    var updateItems: (([String]) -> Void)?
+
+    func updateTotoItems(_ closure: (([String]) -> Void)?) {
+        updateItems = closure
+    }
+
     // MARK: - Private Methods
 
     private func saveStoreItems(_ items: [String], _ key: String = "Todos") {
@@ -56,6 +75,14 @@ class ToDoViewModel: ToDoStoreViewModelType {
     }
 
     private func todoItemsDidChange() {
-        updateTotoItems?(items)
+        outputs.updateItems?(items)
+    }
+}
+
+class MyOutputs: ToDoStoreOutputs {
+    var updateItems: (([String]) -> Void)?
+
+    func updateTotoItems(_ closure: (([String]) -> Void)?) {
+        updateItems = closure
     }
 }

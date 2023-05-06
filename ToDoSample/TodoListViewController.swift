@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class ToDoListViewController: UIViewController {
-    private let viewModel: ToDoViewModel
+    private let viewModel: ToDoStoreViewModelType
     private var items = [String]()
 
     private let tableView: UITableView = {
@@ -20,7 +20,7 @@ class ToDoListViewController: UIViewController {
 
     // MARK: - Initialization
 
-    init(viewModel: ToDoViewModel) {
+    init(viewModel: ToDoStoreViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,12 +37,12 @@ class ToDoListViewController: UIViewController {
         setupSubviews()
         setupTableViewdelegate()
 
-        viewModel.updateTotoItems = { [weak self] newTodoItems in
-            self?.items = newTodoItems
+        viewModel.outputs.updateTotoItems { [weak self] newItems in
+            self?.items = newItems
             self?.tableView.reloadData()
         }
 
-        viewModel.retrieve()
+        viewModel.inputs.retrieve()
     }
 
     private func didTapEditTodo(index: Int) {
@@ -59,7 +59,7 @@ class ToDoListViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak self] _ in
 
             if let titleField = alert.textFields?.first, let title = titleField.text, !title.isEmpty {
-                self?.viewModel.update(index: index, title: title)
+                self?.viewModel.inputs.update(index: index, title: title)
             }
         }))
 
@@ -67,7 +67,7 @@ class ToDoListViewController: UIViewController {
     }
 
     private func didTapDeleteTodo(indexPath: IndexPath) {
-        viewModel.delete(indexPath: indexPath)
+        viewModel.inputs.delete(indexPath: indexPath)
     }
 
     @objc private func didTapAddTodo() {
@@ -82,7 +82,7 @@ class ToDoListViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak self] _ in
 
             if let titleField = alert.textFields?.first, let title = titleField.text, !title.isEmpty {
-                self?.viewModel.add(title)
+                self?.viewModel.inputs.add(title)
             }
         }))
 
