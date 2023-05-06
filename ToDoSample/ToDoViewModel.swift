@@ -7,16 +7,22 @@
 
 import Foundation
 
+public enum StoreResult {
+    case empty
+    case found(items: [String])
+    case failure(Error)
+}
+
 public protocol ToDoStoreInputs {
     func retrieve()
-    func delete(indexPath: IndexPath)
+    func delete(index: Int)
     func add(_ newTodo: String)
     func update(index: Int, title: String)
 }
 
 public protocol ToDoStoreOutputs {
-    var updateItems: (([String]) -> Void)? { get }
-    func updateTotoItems(_ closure: (([String]) -> Void)?)
+    var storeResult: ((StoreResult) -> Void)? { get }
+    func updateStoreResult(_ closure: ((StoreResult) -> Void)?)
 }
 
 public protocol ToDoStoreViewModelType {
@@ -52,56 +58,71 @@ class ToDoViewModel: ToDoStoreViewModelType, ToDoStoreOutputs, ToDoStoreInputs {
     // MARK: - Inputs
 
     func retrieve() {
-        let storeItems = getStoreItems()
-        items = storeItems
-        todoItemsDidChange()
+        queue.async {
+            if let data = self.fileManager.contents(atPath: self.path) {
+                do {
+                    let storeItems = try JSONDecoder().decode([String].self, from: data)
+                    self.items = storeItems
+                    self.storeCompletion(.found(items: self.items))
+                } catch {
+                    self.storeCompletion(.empty)
+                }
+            } else {
+                self.storeCompletion(.empty)
+            }
+        }
     }
 
-    func delete(indexPath: IndexPath) {
-        items.remove(at: indexPath.row)
-        saveStoreItems(items)
-        todoItemsDidChange()
+    func delete(index: Int) {
+        items.remove(at: index)
+        insert(items)
     }
 
     func add(_ newTodo: String) {
         items.append(newTodo)
-        saveStoreItems(items)
-        todoItemsDidChange()
+        insert(items)
     }
 
     func update(index: Int, title: String) {
         items[index] = title
-        saveStoreItems(items)
-        todoItemsDidChange()
+        insert(items)
     }
 
     // MARK: - Outputs
 
-    var updateItems: (([String]) -> Void)?
+    var storeResult: ((StoreResult) -> Void)?
 
-    func updateTotoItems(_ closure: (([String]) -> Void)?) {
-        updateItems = closure
+    func updateStoreResult(_ closure: ((StoreResult) -> Void)?) {
+        storeResult = closure
     }
 
     // MARK: - Private Methods
 
-    private func saveStoreItems(_ items: [String], _ key: String = "Todos") {
-        UserDefaults.standard.set(items, forKey: key)
+    private func insert(_ items: [String]) {
+        queue.async(flags: .barrier) {
+            do {
+                let data = try JSONEncoder().encode(items)
+                if self.fileManager.fileExists(atPath: self.path) {
+                    try self.fileManager.removeItem(atPath: self.path)
+                }
+
+                self.fileManager.createFile(atPath: self.path, contents: data)
+                self.storeCompletion(.found(items: items))
+            } catch {
+                self.storeCompletion(.failure(error))
+            }
+        }
     }
 
-    private func getStoreItems(_ key: String = "Todos") -> [String] {
-        return UserDefaults.standard.stringArray(forKey: key) ?? []
-    }
-
-    private func todoItemsDidChange() {
-        outputs.updateItems?(items)
+    private func storeCompletion(_ result: StoreResult) {
+        outputs.storeResult?(result)
     }
 }
 
 class MyOutputs: ToDoStoreOutputs {
-    var updateItems: (([String]) -> Void)?
+    var storeResult: ((StoreResult) -> Void)?
 
-    func updateTotoItems(_ closure: (([String]) -> Void)?) {
-        updateItems = closure
+    func updateStoreResult(_ closure: ((StoreResult) -> Void)?) {
+        storeResult = closure
     }
 }

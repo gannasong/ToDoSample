@@ -37,11 +37,21 @@ class ToDoListViewController: UIViewController {
         setupSubviews()
         setupTableViewdelegate()
 
-        viewModel.outputs.updateTotoItems { [weak self] newItems in
-            self?.items = newItems
-            self?.tableView.reloadData()
-        }
+        viewModel.outputs.updateStoreResult { [weak self] result in
+            switch result {
+                case .found(let newitems):
+                    self?.items = newitems
+                case .empty:
+                    self?.items = []
+                case .failure(let error):
+                    fatalError("Error: get some error!")
+            }
 
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+        
         viewModel.inputs.retrieve()
     }
 
@@ -67,7 +77,7 @@ class ToDoListViewController: UIViewController {
     }
 
     private func didTapDeleteTodo(indexPath: IndexPath) {
-        viewModel.inputs.delete(indexPath: indexPath)
+        viewModel.inputs.delete(index: indexPath.row)
     }
 
     @objc private func didTapAddTodo() {
