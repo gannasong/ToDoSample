@@ -7,12 +7,6 @@
 
 import Foundation
 
-public enum StoreResult {
-    case empty
-    case found(items: [String])
-    case failure(Error)
-}
-
 class ToDoViewModel: ToDoStoreViewModelType, ToDoStoreOutputs, ToDoStoreInputs {
     let fileManager: FileManager
     private var items = [String]()

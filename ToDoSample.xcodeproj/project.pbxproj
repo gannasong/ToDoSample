@@ -19,6 +19,8 @@
 		49DF0C122A04EC5F00D6A490 /* ToDoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF0C102A04EC5F00D6A490 /* ToDoViewModel.swift */; };
 		49DF0C192A06CD7F00D6A490 /* ToDoStoreViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF0C182A06CD7F00D6A490 /* ToDoStoreViewModelType.swift */; };
 		49DF0C1A2A06CD7F00D6A490 /* ToDoStoreViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF0C182A06CD7F00D6A490 /* ToDoStoreViewModelType.swift */; };
+		49DF0C1C2A06CDDA00D6A490 /* StoreResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF0C1B2A06CDDA00D6A490 /* StoreResult.swift */; };
+		49DF0C1D2A06CDDA00D6A490 /* StoreResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF0C1B2A06CDDA00D6A490 /* StoreResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,7 @@
 		49DF0BE52A04063500D6A490 /* ToDoSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoSampleTests.swift; sourceTree = "<group>"; };
 		49DF0C102A04EC5F00D6A490 /* ToDoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewModel.swift; sourceTree = "<group>"; };
 		49DF0C182A06CD7F00D6A490 /* ToDoStoreViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoStoreViewModelType.swift; sourceTree = "<group>"; };
+		49DF0C1B2A06CDDA00D6A490 /* StoreResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreResult.swift; sourceTree = "<group>"; };
 		8286B6B6310A6FAE2FB6EFA3 /* Pods_ToDoSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6C398793512BC2D60C27AAD /* Pods_ToDoSampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoSampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D54343CA9FD9D697615D3DB4 /* Pods-ToDoSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoSampleTests.release.xcconfig"; path = "Target Support Files/Pods-ToDoSampleTests/Pods-ToDoSampleTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				49DF0C182A06CD7F00D6A490 /* ToDoStoreViewModelType.swift */,
+				49DF0C1B2A06CDDA00D6A490 /* StoreResult.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -313,6 +317,7 @@
 				49DF0BD32A04063400D6A490 /* ToDoListViewController.swift in Sources */,
 				49DF0C192A06CD7F00D6A490 /* ToDoStoreViewModelType.swift in Sources */,
 				49DF0BCF2A04063400D6A490 /* AppDelegate.swift in Sources */,
+				49DF0C1C2A06CDDA00D6A490 /* StoreResult.swift in Sources */,
 				49DF0BD12A04063400D6A490 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49DF0C1D2A06CDDA00D6A490 /* StoreResult.swift in Sources */,
 				49DF0C122A04EC5F00D6A490 /* ToDoViewModel.swift in Sources */,
 				49DF0C1A2A06CD7F00D6A490 /* ToDoStoreViewModelType.swift in Sources */,
 				49DF0BE62A04063500D6A490 /* ToDoSampleTests.swift in Sources */,
