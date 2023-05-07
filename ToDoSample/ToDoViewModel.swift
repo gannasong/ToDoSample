@@ -8,24 +8,27 @@
 import Foundation
 
 class ToDoViewModel: ToDoStoreViewModelType, ToDoStoreOutputs, ToDoStoreInputs {
-    let fileManager: FileManager
+    private let fileManager: FileManager
+    private let cachePath: String
+
     private var items = [String]()
 
     var inputs: ToDoStoreInputs { self }
     var outputs: ToDoStoreOutputs = MyOutputs()
 
-    public init(fileManager: FileManager = .default) {
+    public init(fileManager: FileManager = .default, cachePath: String = String(describing: ToDoStoreViewModelType.self)) {
         self.fileManager = fileManager
+        self.cachePath = cachePath
     }
 
     var path: String {
-        return getURL().appendingPathComponent(String(describing: "ToDoStore"), isDirectory: false).path
+        return getURL().appendingPathComponent(cachePath, isDirectory: false).path
     }
 
     var queue = DispatchQueue(label: "\(ToDoViewModel.self).Queue", qos: .userInitiated, attributes: .concurrent)
 
     private func getURL() -> URL {
-        if let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        if let directory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
             return directory
         } else {
             fatalError("Couldn't create directory to save.")

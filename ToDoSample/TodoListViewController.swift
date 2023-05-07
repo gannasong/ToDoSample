@@ -43,7 +43,7 @@ class ToDoListViewController: UIViewController {
                     self?.items = newitems
                 case .empty:
                     self?.items = []
-                case .failure(let error):
+                case .failure:
                     fatalError("Error: get some error!")
             }
 
