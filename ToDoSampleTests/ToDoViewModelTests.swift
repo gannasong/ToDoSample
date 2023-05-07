@@ -27,6 +27,15 @@ final class ToDoViewModelTests: XCTestCase {
         expect(sut, toRetrieve: .empty)
     }
 
+    func test_retrieve_hasNoSideEffectsOnEmptyCache() {
+        let sut = makeSUT()
+
+        sut.inputs.retrieve()
+        expect(sut, toRetrieve: .empty)
+
+        sut.inputs.retrieve()
+        expect(sut, toRetrieve: .empty)
+    }
 
     // MARK: - Helpers
 
