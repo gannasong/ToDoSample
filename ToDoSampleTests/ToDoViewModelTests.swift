@@ -9,6 +9,16 @@ import XCTest
 
 final class ToDoViewModelTests: XCTestCase {
 
+    override func setUp() {
+        super.setUp()
+        setupEmptyStoreState()
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        undoStoreSideEffects()
+    }
+
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = makeSUT()
 
@@ -29,6 +39,18 @@ final class ToDoViewModelTests: XCTestCase {
 
     private func testSpecificsPathKey() -> String {
         return "\(type(of: self)).store"
+    }
+
+    private func setupEmptyStoreState() {
+        deleteStoreArtifacts()
+    }
+
+    private func undoStoreSideEffects() {
+        deleteStoreArtifacts()
+    }
+
+    private func deleteStoreArtifacts() {
+        try? FileManager.default.removeItem(atPath: testSpecificsPathKey())
     }
 
     func expect(_ sut: ToDoStoreViewModelType, toRetrieve expectResult: StoreResult, file: StaticString = #file, line: UInt = #line) {
