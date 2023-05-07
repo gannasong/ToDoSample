@@ -57,6 +57,17 @@ final class ToDoViewModelTests: XCTestCase {
         expect(sut, toRetrieve: .found(items: [item1, item2]))
     }
 
+    func test_add_deliversNoErrorOnEmptyCache() {
+        let sut = makeSUT()
+        let item = uniqueItem()
+
+        sut.inputs.add(item)
+
+        let additionError = expectAdd(sut)
+
+        XCTAssertNil(additionError, "Expected to add cache successfully")
+    }
+
     // MARK: - Helpers
 
     private func makeSUT() -> ToDoStoreViewModelType {
@@ -109,5 +120,22 @@ final class ToDoViewModelTests: XCTestCase {
         }
 
         wait(for: [exp], timeout: 1.0)
+    }
+
+    @discardableResult
+    func expectAdd(_ sut: ToDoStoreViewModelType) -> Error? {
+        let exp = expectation(description: "Wait for cache insertion")
+        var addError: Error?
+
+        sut.outputs.updateStoreResult { receivedStoreResult in
+            if case .failure(let receivedAddError) = receivedStoreResult {
+                addError = receivedAddError
+            }
+
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 1.0)
+        return addError
     }
 }
