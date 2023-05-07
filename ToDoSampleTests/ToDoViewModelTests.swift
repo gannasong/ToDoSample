@@ -42,8 +42,19 @@ final class ToDoViewModelTests: XCTestCase {
         let sut = makeSUT()
 
         sut.inputs.add(item)
-
         expect(sut, toRetrieve: .found(items: [item]))
+    }
+
+    func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
+        let item1 = uniqueItem()
+        let item2 = uniqueItem()
+        let sut = makeSUT()
+
+        sut.inputs.add(item1)
+        expect(sut, toRetrieve: .found(items: [item1]))
+
+        sut.inputs.add(item2)
+        expect(sut, toRetrieve: .found(items: [item1, item2]))
     }
 
     // MARK: - Helpers
