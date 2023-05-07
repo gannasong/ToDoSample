@@ -54,7 +54,10 @@ class ToDoViewModel: ToDoStoreViewModelType, ToDoStoreOutputs, ToDoStoreInputs {
     }
 
     func delete(index: Int) {
-        items.remove(at: index)
+        if items.indices.contains(index) {
+            items.remove(at: index)
+        }
+
         insert(items)
     }
 

@@ -62,10 +62,28 @@ final class ToDoViewModelTests: XCTestCase {
         let item = uniqueItem()
 
         sut.inputs.add(item)
-
         let additionError = expectAdd(sut)
 
         XCTAssertNil(additionError, "Expected to add cache successfully")
+    }
+
+    func test_delete_deliversNoErrorOnEmptyCache() {
+        let sut = makeSUT()
+
+        sut.inputs.delete(index: 0)
+        let deletionError = expectDelete(sut)
+
+        XCTAssertNil(deletionError, "Expected empty cache deletion to succed")
+    }
+
+    func test_delete_deliversNoErrorOnNonEmptyCache() {
+        let sut = makeSUT()
+        let item = uniqueItem()
+
+        sut.inputs.add(item)
+        let deletionError = expectDelete(sut)
+
+        XCTAssertNil(deletionError, "Expected non-empty cache deletion to succed")
     }
 
     // MARK: - Helpers
@@ -137,5 +155,23 @@ final class ToDoViewModelTests: XCTestCase {
 
         wait(for: [exp], timeout: 1.0)
         return addError
+    }
+
+    @discardableResult
+    func expectDelete(_ sut: ToDoStoreViewModelType) -> Error? {
+        let exp = expectation(description: "Wait for cache deletion")
+        var deletionError: Error?
+
+        sut.outputs.updateStoreResult { receivedDeletionResult in
+            print(">>> 999")
+            if case .failure(let receivedDeletionError) = receivedDeletionResult {
+                deletionError = receivedDeletionError
+            }
+
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 1.0)
+        return deletionError
     }
 }
