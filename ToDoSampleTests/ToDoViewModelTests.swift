@@ -37,6 +37,15 @@ final class ToDoViewModelTests: XCTestCase {
         expect(sut, toRetrieve: .empty)
     }
 
+    func test_retrieve_deliversFoundValuesOnNonEmptyCache() {
+        let item = uniqueItem()
+        let sut = makeSUT()
+
+        sut.inputs.add(item)
+
+        expect(sut, toRetrieve: .found(items: [item]))
+    }
+
     // MARK: - Helpers
 
     private func makeSUT() -> ToDoStoreViewModelType {
@@ -46,8 +55,16 @@ final class ToDoViewModelTests: XCTestCase {
         return sut
     }
 
+    private func uniqueItem() -> String {
+        return UUID().uuidString
+    }
+
     private func testSpecificsPathKey() -> String {
-        return "\(type(of: self)).store"
+        return cacheURL().appendingPathComponent(String(describing: "\(type(of: self)).store"), isDirectory: false).path
+    }
+
+    private func cacheURL() -> URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
 
     private func setupEmptyStoreState() {
