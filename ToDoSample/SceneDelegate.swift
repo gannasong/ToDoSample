@@ -18,10 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func configureWindow() {
-        let controller = makeToDoListViewController()
-        window?.rootViewController = UINavigationController(rootViewController: controller)
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
+
+    private lazy var navigationController = UINavigationController(rootViewController: makeToDoListViewController())
 
     private func makeToDoListViewController() -> ToDoListViewController {
         let viewModel = ToDoViewModel()
