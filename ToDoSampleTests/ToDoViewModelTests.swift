@@ -86,12 +86,23 @@ final class ToDoViewModelTests: XCTestCase {
         XCTAssertNil(deletionError, "Expected non-empty cache deletion to succed")
     }
 
+    func test_update_modifyPreviouslyAddCache() {
+        let sut = makeSUT()
+        let item = uniqueItem()
+        sut.inputs.add(uniqueItem())
+        expect(sut, toRetrieve: .found(items: [item]))
+
+        sut.inputs.update(index: 0, title: item)
+        let expectItme = expectUpdate(sut)
+
+        XCTAssertEqual(item, expectItme)
+    }
+
     // MARK: - Helpers
 
     private func makeSUT() -> ToDoStoreViewModelType {
-        let fileManager = FileManager()
         let pathKey = testSpecificsPathKey()
-        let sut = ToDoViewModel(fileManager: fileManager, cachePath: pathKey)
+        let sut = ToDoViewModel(cachePath: pathKey)
         return sut
     }
 
@@ -119,6 +130,15 @@ final class ToDoViewModelTests: XCTestCase {
         try? FileManager.default.removeItem(atPath: testSpecificsPathKey())
     }
 
+    private func setupPreviouslyCache(items: [String]) {
+        do {
+            let data = try JSONEncoder().encode(items)
+            FileManager.default.createFile(atPath: testSpecificsPathKey(), contents: data)
+        } catch {
+            fatalError(">>> Set previously cache error")
+        }
+    }
+
     func expect(_ sut: ToDoStoreViewModelType, toRetrieve expectResult: StoreResult, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for cache retrieval")
 
@@ -138,6 +158,22 @@ final class ToDoViewModelTests: XCTestCase {
         }
 
         wait(for: [exp], timeout: 1.0)
+    }
+
+    @discardableResult
+    func expectUpdate(_ sut: ToDoStoreViewModelType, at index: Int = 0) -> String? {
+        let exp = expectation(description: "Wait for cache update")
+        var updateTitle: String?
+        sut.outputs.updateStoreResult { result in
+            if case .found(let items) = result {
+                updateTitle = items[index]
+            }
+
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 1.0)
+        return updateTitle
     }
 
     @discardableResult
@@ -163,7 +199,6 @@ final class ToDoViewModelTests: XCTestCase {
         var deletionError: Error?
 
         sut.outputs.updateStoreResult { receivedDeletionResult in
-            print(">>> 999")
             if case .failure(let receivedDeletionError) = receivedDeletionResult {
                 deletionError = receivedDeletionError
             }

@@ -67,7 +67,10 @@ class ToDoViewModel: ToDoStoreViewModelType, ToDoStoreOutputs, ToDoStoreInputs {
     }
 
     func update(index: Int, title: String) {
-        items[index] = title
+        if items.indices.contains(index) {
+            items[index] = title
+        }
+
         insert(items)
     }
 
