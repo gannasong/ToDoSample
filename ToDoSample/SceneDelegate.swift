@@ -14,7 +14,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UINavigationController(rootViewController: ToDoListViewController(viewModel: ToDoViewModel()))
+        configureWindow()
+    }
+
+    func configureWindow() {
+        let controller = makeToDoListViewController()
+        window?.rootViewController = UINavigationController(rootViewController: controller)
         window?.makeKeyAndVisible()
+    }
+
+    private func makeToDoListViewController() -> ToDoListViewController {
+        let viewModel = ToDoViewModel()
+        let controller = ToDoListViewController(viewModel: viewModel)
+        return controller
     }
 }
