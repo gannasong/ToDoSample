@@ -27,7 +27,7 @@ class ToDoViewModel: ToDoStoreViewModelType, ToDoStoreOutputs, ToDoStoreInputs {
 
     var queue = DispatchQueue(label: "\(ToDoViewModel.self).Queue", qos: .userInitiated, attributes: .concurrent)
 
-    private func getURL() -> URL {
+    func getURL() -> URL {
         if let directory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
             return directory
         } else {

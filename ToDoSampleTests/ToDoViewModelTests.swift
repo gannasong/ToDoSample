@@ -98,11 +98,38 @@ final class ToDoViewModelTests: XCTestCase {
         XCTAssertEqual(item, expectItme)
     }
 
+    func test_update_receivedUpdateStoreResult() {
+        let sut = makeSUT()
+        let exp = expectation(description: "Wait for update store result")
+        let expectedStoreResult: StoreResult = .empty
+        var actualStoreResult: StoreResult?
+
+        sut.outputs.updateStoreResult { result in
+            actualStoreResult = result
+            exp.fulfill()
+        }
+
+        sut.outputs.storeResult?(expectedStoreResult)
+
+        XCTAssertEqual(expectedStoreResult, actualStoreResult)
+
+        wait(for: [exp], timeout: 1.0)
+    }
+    
+    func test_cacheURL_getURLReturnsValidDirectoryURL() {
+        let sut = makeSUT()
+        let expectedURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+
+        let result = sut.getURL()
+
+        XCTAssertEqual(expectedURL, result)
+    }
+
     // MARK: - Helpers
 
-    private func makeSUT() -> ToDoStoreViewModelType {
+    private func makeSUT(filemanager: FileManager = .default) -> ToDoViewModel {
         let pathKey = testSpecificsPathKey()
-        let sut = ToDoViewModel(cachePath: pathKey)
+        let sut = ToDoViewModel(fileManager: filemanager, cachePath: pathKey)
         return sut
     }
 
@@ -135,7 +162,7 @@ final class ToDoViewModelTests: XCTestCase {
             let data = try JSONEncoder().encode(items)
             FileManager.default.createFile(atPath: testSpecificsPathKey(), contents: data)
         } catch {
-            fatalError(">>> Set previously cache error")
+            fatalError("Set previously cache error")
         }
     }
 
