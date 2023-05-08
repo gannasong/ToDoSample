@@ -12,7 +12,7 @@ class ToDoListViewController: UIViewController {
     private let viewModel: ToDoStoreViewModelType
     private var items = [String]()
 
-    private let tableView: UITableView = {
+    public let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
